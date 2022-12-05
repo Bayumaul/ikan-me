@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\StoreController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/store/list-product', function () {
+    // return 'asu';
+});
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,4 +28,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::resource('cart', CartController::class)->middleware('auth');
+Route::resource('store', StoreController::class)->middleware('auth');
+Route::get('store/list-product', [StoreController::class, 'product'])->name('store.product');
+Route::resource('product', ProdukController::class);
+
+require __DIR__ . '/auth.php';

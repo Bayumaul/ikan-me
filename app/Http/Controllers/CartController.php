@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk\Produk;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class ProdukController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        // return 'asdas';
+        return view('carts.index');
     }
 
     /**
@@ -41,10 +42,10 @@ class ProdukController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produk\Produk  $produk
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Produk $produk)
+    public function show(Cart $cart)
     {
         //
     }
@@ -52,10 +53,10 @@ class ProdukController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Produk\Produk  $produk
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produk $produk)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -64,10 +65,10 @@ class ProdukController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produk\Produk  $produk
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -75,10 +76,10 @@ class ProdukController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produk\Produk  $produk
+     * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produk $produk)
+    public function destroy(Cart $cart)
     {
         //
     }
