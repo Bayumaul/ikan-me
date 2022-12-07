@@ -31,6 +31,6 @@ Route::get('/dashboard', function () {
 Route::resource('cart', CartController::class)->middleware('auth');
 Route::resource('store', StoreController::class)->middleware('auth');
 Route::get('store/list-product', [StoreController::class, 'product'])->name('store.product');
-Route::resource('product', ProdukController::class);
+Route::resource('produk', ProdukController::class);
 
 require __DIR__ . '/auth.php';

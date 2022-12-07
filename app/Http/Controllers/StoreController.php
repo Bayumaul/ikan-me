@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk\Produk;
 use App\Models\Store\Store;
 use Illuminate\Http\Request;
 
@@ -109,7 +110,8 @@ class StoreController extends Controller
 
     public function product()
     {
-        // return 'sadas';
-        return view('store.product');
+        $store = Store::where('user_id', auth()->user()->id)->first();
+        $products = Produk::where('store_id', $store->id)->with('category')->get();
+        return view('store.product', compact('store', 'products'));
     }
 }

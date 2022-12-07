@@ -273,6 +273,7 @@
 
     <!-- Main Js -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     {{-- <script src="{{ asset('/js/appv2.js') }}"></script> --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

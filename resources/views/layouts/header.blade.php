@@ -74,7 +74,7 @@
                    <!-- Header Logo Start -->
                    <div class="col-auto align-self-center">
                        <div class="header-logo">
-                           <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
+                           {{-- <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a> --}}
                        </div>
                    </div>
                    <!-- Header Logo End -->
@@ -128,7 +128,7 @@
                        <div class="main-menu manu-color-white">
                            <ul>
                                <li><a href="{{ url('/') }}">Beranda</a></li>
-                               <li><a href="{{ route('product.index') }}">Produk</a></li>
+                               <li><a href="{{ route('produk.index') }}">Produk</a></li>
                                <li class="dropdown position-static"><a href="#">Shop <i
                                            class="ion-ios-arrow-down"></i></a>
                                    <ul class="mega-menu d-block">
@@ -177,14 +177,14 @@
 
                                            <ul class="menu-banner w-100">
                                                <li>
-                                                   <a class="p-0" href="shop-left-sidebar.html"><img
+                                                   {{-- <a class="p-0" href="shop-left-sidebar.html"><img
                                                            class="img-responsive w-100"
-                                                           src="assets/images/banner/3.jpg" alt=""></a>
+                                                           src="assets/images/banner/3.jpg" alt=""></a> --}}
                                                </li>
                                                <li>
-                                                   <a class="p-0" href="shop-left-sidebar.html"><img
+                                                   {{-- <a class="p-0" href="shop-left-sidebar.html"><img
                                                            class="img-responsive w-100"
-                                                           src="assets/images/banner/4.jpg" alt=""></a>
+                                                           src="assets/images/banner/4.jpg" alt=""></a> --}}
                                                </li>
                                            </ul>
                                        </li>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <!-- account area start -->
-
     <div class="checkout-area pt-100px pb-100px">
         <div class="container">
             <div class="row">

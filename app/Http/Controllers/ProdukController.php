@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Produk\Produk;
+use App\Models\ProdukPhotos;
+use App\Models\Store\Store;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -24,7 +27,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -35,7 +39,18 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([]);
+
+        $product = Produk::create([
+            'store_id' => Store::where('user_id', auth()->user()->id)->first()->id,
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'description' => $request->description,
+        ]);
+
+        return redirect(route('produk.edit', $product->id))
+            ->with('success', 'Produk Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +72,9 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        $photos = ProdukPhotos::where('produk_id', $produk->id)->get();
+        $categories = Category::all();
+        return view('products.create', compact('categories', 'produk', 'photos'));
     }
 
     /**
@@ -69,7 +86,18 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        if ($request->file('foto')) {
+            foreach ($request->foto as $key => $value) {
+                $image = $request->file('foto')[$key];
+                $image->storeAs('product/images/' . $produk->name, $image->hashName());
+                ProdukPhotos::create([
+                    'produk_id' => $produk->id,
+                    'foto' => $image->hashName(),
+                ]);
+            }
+        }
+        return back()
+            ->with('success', 'Produk / Foto Berhasil Diupdate');
     }
 
     /**
