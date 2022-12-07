@@ -33,7 +33,19 @@
                                <ul class="dropdown-menu dropdown-menu-right">
                                    @auth
                                        <li><a class="dropdown-item" href="my-account.html">My account</a></li>
-                                       <li><a class="dropdown-item" href="{{ route('store.index') }}">Buat Toko</a></li>
+                                       @php
+                                           $store = App\Models\Store\Store::where('user_id', auth()->user()->id)->first();
+                                           if ($store) {
+                                               $havestore = 1;
+                                           } else {
+                                               $havestore = 0;
+                                           }
+                                       @endphp
+                                       @if ($havestore = 0)
+                                           <li><a class="dropdown-item" href="{{ route('store.index') }}">Buat Toko</a></li>
+                                       @else
+                                           <li><a class="dropdown-item" href="{{ route('store.index') }}">Toko Saya</a></li>
+                                       @endif
                                        <form method="POST" action="{{ route('logout') }}">
                                            @csrf
                                            <li><button type="submit" class="dropdown-item">Logout</button></li>

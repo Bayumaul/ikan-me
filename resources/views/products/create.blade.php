@@ -55,9 +55,9 @@
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Harga Produk</label>
-                                                            <input type="number" name="price" placeholder="Harga Produk"
-                                                                required
-                                                                value="{{ @$produk ? number_format(@$produk->price) : 0 }}" />
+                                                            <input type="text" name="price" class="money"
+                                                                placeholder="Harga Produk" required
+                                                                value="{{ @$produk->price ?? 0 }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
@@ -69,8 +69,8 @@
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Stok</label>
-                                                            <input type="number" name="stok" placeholder="Harga Produk"
-                                                                required value="{{ @$produk->stok }}" />
+                                                            <input type="number" name="stok" placeholder="Stok Produk"
+                                                                required value="{{ @$produk->stok ?? 0 }}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,29 +118,25 @@
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 1</label>
-                                                            <input type="file" name="foto[]" placeholder="Nama Produk"
-                                                                required value="{{ @$produk->name }}" />
+                                                            <input type="file" name="foto[]" required />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 2</label>
-                                                            <input type="file" name="foto[]" placeholder="Nama Produk"
-                                                                required value="{{ @$produk->name }}" />
+                                                            <input type="file" name="foto[]" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 3</label>
-                                                            <input type="file" name="foto[]" placeholder="Nama Produk"
-                                                                required value="{{ @$produk->name }}" />
+                                                            <input type="file" name="foto[]" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 4</label>
-                                                            <input type="file" name="foto[]" placeholder="Nama Produk"
-                                                                required value="{{ @$produk->name }}" />
+                                                            <input type="file" name="foto[]" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -178,11 +174,13 @@
                                 <div id="my-account-3" class="panel-collapse collapse show" data-bs-parent="#faq">
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
-                                            @foreach ($photos as $photo)
-                                                <img width="50%" height="50%"
-                                                    src="{{ asset('/storage/product/images/' . $produk->name . '/' . $photo->foto) }}"
-                                                    alt="" srcset="">
-                                            @endforeach
+                                            @if (@$produk)
+                                                @foreach ($photos as $photo)
+                                                    <img width="50%" height="50%"
+                                                        src="{{ asset('/storage/product/images/' . $photo->foto) }}"
+                                                        alt="" srcset="">
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -193,4 +191,8 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.maskedinput-1.3.min.js"></script>
 @endsection

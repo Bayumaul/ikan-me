@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Category;
-use App\Models\Produk\Produk;
-use App\Models\ProdukPhotos;
 use App\Models\Store\Store;
+use App\Models\ProdukPhotos;
 use Illuminate\Http\Request;
+use App\Models\Produk\Produk;
 
 class ProdukController extends Controller
 {
@@ -17,7 +18,19 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        $products = Produk::with('thumbnail')->latest()->paginate(17);
+        foreach ($products as $product) {
+            if ($product->thumbnail == null) {
+                $product->have_thumbnail = 1;
+            } else $product->have_thumbnail = 0;
+            $from_date = Carbon::parse(date('Y-m-d', strtotime($product->created_at)));
+            $through_date = Carbon::parse(date('Y-m-d', strtotime(now())));
+            $shift_difference = $from_date->diffInDays($through_date);
+            if ($shift_difference > 7) {
+                $product->new = 1;
+            } else $product->new = 0;
+        }
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -46,6 +59,7 @@ class ProdukController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
             'price' => $request->price,
+            'stok' => $request->stok,
             'description' => $request->description,
         ]);
 
@@ -61,7 +75,8 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        // return $produk->photos;
+        return view('products.show', compact('produk'));
     }
 
     /**
@@ -86,15 +101,26 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
+
+        // return $abcde;
         if ($request->file('foto')) {
             foreach ($request->foto as $key => $value) {
                 $image = $request->file('foto')[$key];
-                $image->storeAs('product/images/' . $produk->name, $image->hashName());
+                $image->storeAs('product/images/', $image->hashName());
                 ProdukPhotos::create([
                     'produk_id' => $produk->id,
                     'foto' => $image->hashName(),
                 ]);
             }
+        } else {
+            $product = Produk::find($produk->id);
+            $product->update([
+                'name' => $request->name,
+                'category_id' => $request->category_id,
+                'price' => $request->price,
+                'stok' => $request->stok,
+                'description' => $request->description,
+            ]);
         }
         return back()
             ->with('success', 'Produk / Foto Berhasil Diupdate');
