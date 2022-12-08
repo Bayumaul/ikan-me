@@ -53,13 +53,17 @@
                         </div>
                         <p class="quickview-para">{{ $produk->description }}</p>
                         <div class="pro-details-quality">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                            </div>
-                            <div class="pro-details-cart">
-                                <button class="add-cart btn btn-primary btn-hover-primary ml-4" href="#"> Add To
-                                    Cart</button>
-                            </div>
+                            <form method="POST" action="{{ route('produk.addtocart') }}">
+                                @csrf
+                                <input type="hidden" name="produk_id" value="{{ $produk->id }}">
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" type="text" name="quantity" value="1" />
+                                </div>
+                                <div class="pro-details-cart">
+                                    <button class="add-cart btn btn-primary btn-hover-primary ml-4" type="submit"> Add To
+                                        Cart</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="pro-details-wish-com">
                             <div class="pro-details-wishlist">

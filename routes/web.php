@@ -30,6 +30,9 @@ Route::get('/dashboard', function () {
 
 Route::resource('cart', CartController::class)->middleware('auth');
 Route::resource('store', StoreController::class)->middleware('auth');
+Route::post('produk/add-to-cart', [ProdukController::class, 'addtocart'])->name('produk.addtocart')->middleware('auth');
+Route::post('produk/update-to-cart', [CartController::class, 'updatecart'])->name('cart.updatecart')->middleware('auth');
+Route::get('produk/delete-to-cart', [CartController::class, 'destroyall'])->name('cart.destroyall')->middleware('auth');
 Route::get('store/list-product', [StoreController::class, 'product'])->name('store.product');
 Route::resource('produk', ProdukController::class);
 

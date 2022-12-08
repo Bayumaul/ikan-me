@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Store\Store;
 use App\Models\ProdukPhotos;
 use Illuminate\Http\Request;
 use App\Models\Produk\Produk;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
 {
@@ -135,5 +137,17 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         //
+    }
+
+    public function addtocart(Request $request)
+    {
+        Cart::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $request->produk_id,
+            'quantity' => $request->quantity
+        ]);
+
+        Alert::success('Produk Berhasil Dimasukan Ke Keranjang !');
+        return back();
     }
 }

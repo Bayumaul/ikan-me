@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
@@ -14,7 +15,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::where('user_id', auth()->user->id)->get();
+        $carts = Cart::where('user_id', auth()->user()->id)->with('product')->latest()->get();
+        foreach ($carts as $cart) {
+            $cart->total = $cart->quantity * $cart->product->price;
+        }
+
         return view('carts.index', compact('carts'));
     }
 
@@ -82,5 +87,22 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+    }
+    public function updatecart(Request $request)
+    {
+        // return $request->all();
+        foreach ($request->product_id as $key => $value) {
+            $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $request->product_id[$key])->first();
+            $cart->update(['quantity' => $request->quantity[$key]]);
+        }
+        Alert::success('Keranjang Berhasil Diperbaharui !');
+        return back();
+    }
+    public function destroyall()
+    {
+        Cart::where('user_id', auth()->user()->id)->delete();
+
+        Alert::success('Keranjang Berhasil Dihapus !');
+        return back();
     }
 }
