@@ -15,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::where('user_id', auth()->user()->id)->with('product')->latest()->get();
+        $carts = Cart::where('user_id', auth()->user()->id)->with('product')->where('status', 0)->latest()->get();
         foreach ($carts as $cart) {
             $cart->total = $cart->quantity * $cart->product->price;
         }
@@ -84,9 +84,13 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(Cart $cart, Request $request)
     {
-        //
+        return $request->all();
+        $cart->delete();
+
+        Alert::success('Produk Berhasil Dihapus !');
+        return back();
     }
     public function updatecart(Request $request)
     {

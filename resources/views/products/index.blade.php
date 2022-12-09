@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Produk
+@endsection
 @section('content')
     <div class="shop-category-area pb-100px pt-70px">
         <div class="container">

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ $produk->name }}
+@endsection
 @section('content')
     <!-- Product Details Area Start -->
     <div class="product-details-area pt-100px pb-100px">
@@ -52,9 +55,9 @@
                             </ul>
                         </div>
                         <p class="quickview-para">{{ $produk->description }}</p>
-                        <div class="pro-details-quality">
-                            <form method="POST" action="{{ route('produk.addtocart') }}">
-                                @csrf
+                        <form method="POST" action="{{ route('produk.addtocart') }}">
+                            @csrf
+                            <div class="pro-details-quality">
                                 <input type="hidden" name="produk_id" value="{{ $produk->id }}">
                                 <div class="cart-plus-minus">
                                     <input class="cart-plus-minus-box" type="text" name="quantity" value="1" />
@@ -63,8 +66,8 @@
                                     <button class="add-cart btn btn-primary btn-hover-primary ml-4" type="submit"> Add To
                                         Cart</button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                         <div class="pro-details-wish-com">
                             <div class="pro-details-wishlist">
                                 <a href="wishlist.html"><i class="ion-android-favorite-outline"></i>Add to

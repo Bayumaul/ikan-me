@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::resource('user', UserController::class)->middleware('auth');
+Route::resource('purchase', PurchaseController::class)->middleware('auth');
 Route::resource('cart', CartController::class)->middleware('auth');
 Route::resource('store', StoreController::class)->middleware('auth');
 Route::post('produk/add-to-cart', [ProdukController::class, 'addtocart'])->name('produk.addtocart')->middleware('auth');

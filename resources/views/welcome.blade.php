@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Beranda
+@endsection
 @section('content')
     @include('products.slider')
     @include('products.banner')

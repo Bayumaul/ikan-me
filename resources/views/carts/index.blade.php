@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Keranjang
+@endsection
 @section('content')
     <!-- Cart Area Start -->
     <div class="cart-main-area pt-100px pb-100px">
@@ -21,10 +24,10 @@
                                 <table id="datatable">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
-                                            <th>Product Name</th>
-                                            <th>Until Price</th>
-                                            <th>Qty</th>
+                                            <th>Gambar</th>
+                                            <th>Nama Produk</th>
+                                            <th>Harga</th>
+                                            <th>Jumlah</th>
                                             <th>Subtotal</th>
                                             <th>Action</th>
                                         </tr>
@@ -53,13 +56,16 @@
                                                     {{ number_format($cart->product->price * $cart->quantity, 2) }}</td>
                                                 <td class="product-remove">
                                                     {{-- <a href="#"><i class="icon-pencil"></i></a> --}}
-                                                    <a href="#"><i class="icon-close"></i></a>
+                                                    <a onclick="destroy({{ $cart->id }})"><i class="icon-close"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                        </form>
+                        <form action="" method="post" id="destroy">
+                            @csrf
                         </form>
                         <div class="row">
                             <div class="col-lg-12">
@@ -69,68 +75,19 @@
                                     </div>
                                     <div class="cart-clear">
                                         <button type="button" onclick="updateCart()">Perbarui Keranjang Belanja</button>
-                                        <a href="{{ route('cart.destroyall') }}">Kosongkan Keranjang Belanja</a>
+                                        <a style="color: white" onclick="btnDestroyall()">Kosongkan
+                                            Keranjang
+                                            Belanja</a>
                                     </div>
+                                    <form action="{{ route('cart.destroyall') }}" method="get" id="destroyall">
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-6 mb-lm-30px">
-                                {{-- <div class="cart-tax">
-                                    <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
-                                    </div>
-                                    <div class="tax-wrapper">
-                                        <p>Enter your destination to get a shipping estimate.</p>
-                                        <div class="tax-select-wrapper">
-                                            <div class="tax-select">
-                                                <label>
-                                                    * Country
-                                                </label>
-                                                <select class="email s-email s-wid">
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
-                                                </select>
-                                            </div>
-                                            <div class="tax-select">
-                                                <label>
-                                                    * Region / State
-                                                </label>
-                                                <select class="email s-email s-wid">
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
-                                                </select>
-                                            </div>
-                                            <div class="tax-select mb-25px">
-                                                <label>
-                                                    * Zip/Postal Code
-                                                </label>
-                                                <input type="text" />
-                                            </div>
-                                            <button class="cart-btn-2" type="submit">Get A Quote</button>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="col-lg-4 col-md-6 mb-lm-30px">
-                                {{-- <div class="discount-code-wrapper">
-                                    <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
-                                    </div>
-                                    <div class="discount-code">
-                                        <p>Enter your coupon code if you have one.</p>
-                                        <form>
-                                            <input type="text" required="" name="name" />
-                                            <button class="cart-btn-2" type="submit">Apply Coupon</button>
-                                        </form>
-                                    </div>
-                                </div> --}}
                             </div>
                             <div class="col-lg-4 col-md-12 mt-md-30px">
                                 <div class="grand-totall">
@@ -138,7 +95,10 @@
                                         <h4 class="cart-bottom-title section-bg-gary-cart">Keranjang Total</h4>
                                     </div>
                                     <input type="hidden" id="total" value="{{ $carts->sum('total') }}">
-                                    <form action="#" method="post" id="form-checkout">
+                                    <form action="{{ route('purchase.store') }}" method="post" id="form-checkout"
+                                        target="_blank">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                         <h5>Total products <span>Rp {{ number_format($carts->sum('total'), 2) }}</span>
                                         </h5>
                                         <div class="total-shipping">
@@ -172,4 +132,6 @@
 @endsection
 @section('scripts')
     <script src="{{ asset('/js/cart/index.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 @endsection

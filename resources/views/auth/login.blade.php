@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Login | Register
+@endsection
 @section('content')
     <!-- login area start -->
     @if ($errors->any())
@@ -51,6 +54,7 @@
                                             @csrf
                                             <input type="text" name="name" placeholder="Name" required />
                                             <input name="email" placeholder="Email" type="email" required />
+                                            <input name="no_telepon" placeholder="No Telepon" type="number" required />
                                             <input type="password" name="password" placeholder="Password" required />
                                             <input type="password" name="password_confirmation"
                                                 placeholder="Confirm Password" required />

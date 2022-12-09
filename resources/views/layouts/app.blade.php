@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title') - {{ config('app.name') }}</title>
     <meta name="description"
         content="240+ Best Bootstrap Templates are available on this website. Find your template for your project compatible with the most popular HTML library in the world." />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -53,6 +53,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vendor/vendor.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/plugins.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
     <!-- Main Style -->
     <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->

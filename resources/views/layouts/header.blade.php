@@ -32,7 +32,8 @@
                                        class="icon-user"></i></button>
                                <ul class="dropdown-menu dropdown-menu-right">
                                    @auth
-                                       <li><a class="dropdown-item" href="my-account.html">My account</a></li>
+                                       <li><a class="dropdown-item" href="{{ route('user.index') }}">Akun Saya</a></li>
+                                       <li><a class="dropdown-item" href="my-account.html">Pesanan Anda</a></li>
                                        @php
                                            $store = App\Models\Store\Store::where('user_id', auth()->user()->id)->first();
                                            if ($store) {
@@ -40,6 +41,7 @@
                                            } else {
                                                $havestore = 0;
                                            }
+                                           $cart = App\Models\Cart::where('user_id', auth()->user()->id)->count();
                                        @endphp
                                        @if ($havestore = 0)
                                            <li><a class="dropdown-item" href="{{ route('store.index') }}">Buat Toko</a></li>
@@ -61,9 +63,9 @@
                                <i class="icon-handbag"></i>
                                <span class="header-action-num">
                                    @auth
-                                       0
+                                       {{ $cart }}
                                    @else
-                                       02
+                                       0
                                    @endauth
                                </span>
                                {{-- <span class="cart-amount">€30.00</span> --}}

@@ -44,5 +44,49 @@ $("input[type=radio][name=type_pengiriman]").change(function () {
 });
 
 function updateCart() {
-    $("#update-cart").submit();
+    swal({
+        title: "Apakah Anda Yakin?",
+        text: "Anda Tidak Akan Dapat Mengembalikannya!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Hapus!",
+    }).then((willDelete) => {
+        if (willDelete) {
+            $("#update-cart").submit();
+        } else {
+            swal("Cancelled Successfully");
+        }
+    });
 }
+
+function btnDestroyall() {
+    swal({
+        title: "Apakah Anda Yakin?",
+        text: "Anda Tidak Akan Dapat Mengembalikannya!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, Hapus!",
+    }).then((result) => {
+        if (result.value === true) {
+            $("#destroyall").submit();
+        } else {
+            // swal("Cancelled Successfully");
+        }
+    });
+}
+function destroy(id) {
+    $("#destroy")
+        .prop("action", route("cart.destroy", [id]))
+        .submit();
+}
+
+$("#datatable tbody tr").each(function () {
+    iPrice = parseInt($(this).find("td:eq(1)").text(), 10);
+    iQuantity = parseInt($(this).find("td:eq(2)").find(".quantity").val(), 10);
+    sum = sum + iPrice * iQuantity;
+    $("#sum").text("Sum=" + sum);
+});
