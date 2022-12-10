@@ -1,5 +1,5 @@
 <!-- OffCanvas Cart Start -->
-<div id="offcanvas-cart" class="offcanvas offcanvas-cart">
+{{-- <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
     <div class="inner">
         <div class="head">
             <span class="title">Cart</span>
@@ -66,5 +66,5 @@
             <p class="minicart-message">Free Shipping on All Orders Over $100!</p>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- OffCanvas Cart End -->

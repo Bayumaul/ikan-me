@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -103,5 +104,27 @@ class PurchaseController extends Controller
     public function destroy(Purchase $purchase)
     {
         //
+    }
+
+    public function checkout(Request $request, Purchase $purchase)
+    {
+        $purchase->update(['status' => 1]);
+        $order = Order::create([
+            'user_id' => auth()->user()->id,
+            'purchase_id' => $purchase->id,
+            'jalan' => $request->jalan,
+            'jalan_tambahan' => $request->jalan_tambahan,
+            'kecamatan' => $request->kecamatan,
+            'kabupaten' => $request->kabupaten,
+            'kode_pos' => $request->kode_pos,
+            'note' => $request->note,
+        ]);
+        $carts = Cart::where('user_id', auth()->user()->id)->get();
+        foreach ($carts as $cart) {
+            $cart->update(['status' => 1, 'order_id' => $order->id]);
+        }
+        Alert::success('Order Sudah Dibuat Silahkan Menunggu Barang Anda Sampai Rumah !');
+
+        return redirect(route('order.index'));
     }
 }

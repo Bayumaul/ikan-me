@@ -33,7 +33,7 @@
                                <ul class="dropdown-menu dropdown-menu-right">
                                    @auth
                                        <li><a class="dropdown-item" href="{{ route('user.index') }}">Akun Saya</a></li>
-                                       <li><a class="dropdown-item" href="my-account.html">Pesanan Anda</a></li>
+                                       <li><a class="dropdown-item" href="{{ route('order.index') }}">Pesanan Saya</a></li>
                                        @php
                                            $store = App\Models\Store\Store::where('user_id', auth()->user()->id)->first();
                                            if ($store) {

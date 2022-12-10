@@ -71,6 +71,9 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
+    {{-- <script type='text/javascript'
+        src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script> --}}
+
 </head>
 </head>
 
@@ -78,7 +81,7 @@
     @include('layouts.header')
     @include('carts.side-list')
     <!-- OffCanvas Menu Start -->
-    <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
+    {{-- <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
         <button class="offcanvas-close"></button>
         <div class="inner customScroll">
 
@@ -222,7 +225,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- OffCanvas Menu End -->
 
     <div class="offcanvas-overlay"></div>

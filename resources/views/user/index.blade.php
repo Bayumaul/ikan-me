@@ -52,7 +52,8 @@
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
                                                             <label>No Telepon</label>
-                                                            <input type="number" name="no_telepon" />
+                                                            <input type="number" name="no_telepon"
+                                                                value="{{ auth()->user()->no_telepon }}" />
                                                         </div>
                                                     </div>
                                                 </div>

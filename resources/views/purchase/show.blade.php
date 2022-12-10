@@ -8,68 +8,60 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <div class="billing-info-wrap">
-                        <h3>Detail</h3>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-20px">
-                                    <label> Nama</label>
-                                    <input type="text" value="{{ auth()->user()->name }}" disabled />
+                    <form action="{{ route('purchase.checkout', $purchase->id) }}" method="post" id="submit-order">
+                        @csrf
+                        <input type="hidden" value="{{ $purchase->id }}" name="purchase_id">
+                        <div class="billing-info-wrap">
+                            <h3>Detail</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-20px">
+                                        <label> Nama</label>
+                                        <input type="text" value="{{ auth()->user()->name }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-20px">
+                                        <label>Alamat jalan</label>
+                                        <input id="alamat" class="billing-address"
+                                            placeholder="Nomor rumah dan nama jalan" type="text" name="jalan"
+                                            required />
+                                        <input placeholder="Apartemen, suite, unit dll." type="text"
+                                            name="jalan_tambahan" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="billing-info mb-20px">
+                                        <label>Kota / Kecamatan</label>
+                                        <input type="text" name="kecamatan" id="kecamatan" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-20px">
+                                        <label>Kabupaten</label>
+                                        <input type="text" name="kabupaten" id="kabupaten" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-20px">
+                                        <label>Kode Pos</label>
+                                        <input type="number" name="kode_pos" id="kode_pos" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-20px">
+                                        <label>No Telepon</label>
+                                        <input type="text" value="{{ auth()->user()->no_telepon }}" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="billing-info mb-20px">
+                                        <label>Email </label>
+                                        <input type="text" value="{{ auth()->user()->email }}" />
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-12">
-                                <div class="billing-select mb-20px">
-                                    <label>Country</label>
-                                    <select>
-                                        <option>Select a country</option>
-                                        <option>Azerbaijan</option>
-                                        <option>Bahamas</option>
-                                        <option>Bahrain</option>
-                                        <option>Bangladesh</option>
-                                        <option>Barbados</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-20px">
-                                    <label>Alamat jalan</label>
-                                    <input class="billing-address" placeholder="Nomor rumah dan nama jalan"
-                                        type="text" />
-                                    <input placeholder="Apartemen, suite, unit dll." type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="billing-info mb-20px">
-                                    <label>Kota / Kecamatan</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-20px">
-                                    <label>Kabupaten</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-20px">
-                                    <label>Kode Pos</label>
-                                    <input type="text" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-20px">
-                                    <label>No Telepon</label>
-                                    <input type="text" value="{{ auth()->user()->no_telepon }}" disabled />
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="billing-info mb-20px">
-                                    <label>Email </label>
-                                    <input type="text" value="{{ auth()->user()->email }}" />
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="checkout-account mb-30px">
+                            {{-- <div class="checkout-account mb-30px">
                             <input class="checkout-toggle2 w-auto h-auto" type="checkbox" />
                             <label>Create an account?</label>
                         </div>
@@ -78,13 +70,13 @@
                             <input placeholder="Password" type="password" />
                             <button class="btn-hover checkout-btn" type="submit">register</button>
                         </div> --}}
-                        <div class="additional-info-wrap">
-                            <div class="additional-info">
-                                <label> Note</label>
-                                <textarea placeholder="Catatan tentang pesanan Anda, mis. catatan khusus untuk pengiriman. " name="message"></textarea>
+                            <div class="additional-info-wrap">
+                                <div class="additional-info">
+                                    <label> Note</label>
+                                    <textarea placeholder="Catatan tentang pesanan Anda, mis. catatan khusus untuk pengiriman. " name="note"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        {{-- <div class="checkout-account mt-25">
+                            {{-- <div class="checkout-account mt-25">
                             <input class="checkout-toggle w-auto h-auto" type="checkbox" />
                             <label>Ship to a different address?</label>
                         </div>
@@ -161,7 +153,8 @@
                                 </div>
                             </div>
                         </div> --}}
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-lg-5 mt-md-30px mt-lm-30px ">
                     <div class="your-order-area">
@@ -205,18 +198,17 @@
                                         <div class="panel panel-default single-my-account m-0">
                                             <div class="panel-heading my-account-title">
                                                 <h4 class="panel-title"><a data-bs-toggle="collapse" href="#my-account-1"
-                                                        class="collapsed" aria-expanded="true">Direct bank transfer</a>
+                                                        class="collapsed" aria-expanded="true">Bayar Ditempat</a>
                                                 </h4>
                                             </div>
                                             <div id="my-account-1" class="panel-collapse collapse show"
                                                 data-bs-parent="#faq">
                                                 <div class="panel-body">
-                                                    <p>Please send a check to Store Name, Store Street, Store Town, Store
-                                                        State / County, Store Postcode.</p>
+                                                    <p>Bayar saat barang sudah sampai pastikan alamat sudah benar !</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default single-my-account m-0">
+                                        {{-- <div class="panel panel-default single-my-account m-0">
                                             <div class="panel-heading my-account-title">
                                                 <h4 class="panel-title"><a data-bs-toggle="collapse" href="#my-account-2"
                                                         aria-expanded="false" class="collapsed">Check payments</a></h4>
@@ -241,13 +233,13 @@
                                                         State / County, Store Postcode.</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="Place-order mt-25">
-                            <a class="btn-hover" href="#">Checkout</a>
+                            <a class="btn-hover" onclick="btnCheckout()" href="#">Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -255,4 +247,7 @@
         </div>
     </div>
     <!-- checkout area end -->
+@endsection
+@section('scripts')
+    <script src="{{ asset('/js/purchase/show.js') }}"></script>
 @endsection
