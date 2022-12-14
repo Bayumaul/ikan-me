@@ -25,7 +25,7 @@
             <!-- Single slider item -->
             <div class="hero-slide-item slider-height-2 swiper-slide d-flex text-center">
                 <div class="hero-bg-image">
-                    <img src="assets/images/slider-image/slider-2-2.jpg" alt="">
+                    <img src="https://source.unsplash.com/random/1920X750" alt="">
                 </div>
                 <div class="container align-self-center">
                     <div class="row justify-content-center">

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Toko Saya
+@endsection
 @section('content')
     <!-- account area start -->
     <div class="checkout-area pt-100px pb-100px">
@@ -21,7 +24,8 @@
                                                 <h5>Detail Toko</h5>
                                             </div>
                                             <form method="POST"
-                                                action="{{ @$store ? route('store.update', $store->id) : route('store.store') }}">
+                                                action="{{ @$store ? route('store.update', $store->id) : route('store.store') }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 @if (@$store)
                                                     @method('PUT')
@@ -43,6 +47,12 @@
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
                                                             <label>Logo</label>
+                                                            @if (@$store->logo != null)
+                                                                <img class="mb-2"
+                                                                    src="{{ asset('storage/store/images/' . @$store->logo) }}"
+                                                                    alt="logo" />
+                                                                <br>
+                                                            @endif
                                                             <input type="file" name="logo" />
                                                         </div>
                                                     </div>
@@ -66,12 +76,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default single-my-account m-0" data-aos="fade-up" data-aos-delay="800">
+                            <div class="panel panel-default single-my-account m-0" data-aos="fade-up" data-aos-delay="600">
                                 <div class="panel-heading my-account-title">
                                     <h3 class="panel-title">
                                         <span>2 .</span>
                                         <a class="@if (!@$store) disabled @endif"
                                             href="{{ url('store/list-product') }}">Daftar Produk
+                                        </a>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="panel panel-default single-my-account mt-4" data-aos="fade-up" data-aos-delay="800">
+                                <div class="panel-heading my-account-title">
+                                    <h3 class="panel-title">
+                                        <span>3 .</span>
+                                        <a class="@if (!@$store) disabled @endif"
+                                            href="{{ url('store/list-product') }}">Daftar Pesanan
                                         </a>
                                     </h3>
                                 </div>

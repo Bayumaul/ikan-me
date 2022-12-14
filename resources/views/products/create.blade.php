@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Buat Produk
+@endsection
 @section('content')
     <div class="checkout-area pt-100px pb-100px">
         <div class="container">
@@ -16,7 +19,8 @@
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
                                             <form method="POST"
-                                                action="{{ @$produk ? route('produk.update', $produk->id) : route('produk.store') }}">
+                                                action="{{ @$produk ? route('produk.update', $produk->id) : route('produk.store') }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 @if (@$produk)
                                                     @method('PUT')

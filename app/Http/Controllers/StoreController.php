@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produk\Produk;
 use App\Models\Store\Store;
 use Illuminate\Http\Request;
+use App\Models\Produk\Produk;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StoreController extends Controller
 {
@@ -38,11 +39,11 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         // return $request->logo;
-        // $this->validate($request, [
-        //     'logo'     => 'required|image|mimes:png,jpg,jpeg',
-        //     'name'     => 'required',
-        //     'description'   => 'required'
-        // ]);
+        $this->validate($request, [
+            'logo'     => 'required|image|mimes:png,jpg,jpeg',
+            'name'     => 'required',
+            'description'   => 'required'
+        ]);
 
 
         $duplicate = Store::where('name', $request->name)->first();
@@ -54,12 +55,12 @@ class StoreController extends Controller
         ]);
 
         if ($request->logo) {
-            //upload image
             $image = $request->file('logo');
-            $image->store('store/logo/', $image->hashName());
+            $image->storeAs('store/images/', $image->hashName());
             $store->update(['logo' => $image->hashName()]);
         }
-        return back()->with('success', 'Toko Berhasil Dibuat');
+        Alert::success('Toko Berhasil Dibuat !');
+        return back();
     }
 
     /**
@@ -93,8 +94,23 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        $store->update($request->all());
-        return back()->with('success', 'Toko Berhasil Diupdate');
+        $this->validate($request, [
+            'logo'     => 'required|image|mimes:png,jpg,jpeg',
+            'name'     => 'required',
+            'description'   => 'required'
+        ]);
+        $store->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        if ($request->logo) {
+            $image = $request->file('logo');
+            $image->storeAs('store/images/', $image->hashName());
+            $store->update(['logo' => $image->hashName()]);
+        }
+        Alert::success('Toko Berhasil Diupdate !');
+        return back();
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Models\Store\Store;
 use App\Models\ProdukPhotos;
 use Illuminate\Http\Request;
 use App\Models\Produk\Produk;
+use Illuminate\Validation\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
@@ -54,8 +55,6 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([]);
-
         $product = Produk::create([
             'store_id' => Store::where('user_id', auth()->user()->id)->first()->id,
             'name' => $request->name,

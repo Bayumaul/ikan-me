@@ -41,7 +41,9 @@
                                            } else {
                                                $havestore = 0;
                                            }
-                                           $cart = App\Models\Cart::where('user_id', auth()->user()->id)->count();
+                                           $cart = App\Models\Cart::where('user_id', auth()->user()->id)
+                                               ->where('status', 0)
+                                               ->count();
                                        @endphp
                                        @if ($havestore = 0)
                                            <li><a class="dropdown-item" href="{{ route('store.index') }}">Buat Toko</a></li>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PurchaseController;
@@ -23,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/store/list-product', function () {
     // return 'asu';
 });
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
