@@ -4,13 +4,11 @@
             <div class="row">
                 <div class="col-md-12 text-center" data-aos="fade-up">
                     <div class="section-title mb-0">
-                        <h2 class="title">Porduk Kami</h2>
-                        {{-- <p class="sub-title mb-30px">Torem ipsum dolor sit amet, consectetur adipisicing elitsed do
-                            eiusmo tempor incididunt ut labore</p> --}}
+                        <h2 class="title">Toko Terpercaya</h2>
                     </div>
                 </div>
 
-                <!-- Tab Start -->
+                {{-- <!-- Tab Start -->
                 <div class="col-md-12 text-center mb-40px" data-aos="fade-up" data-aos-delay="200">
                     <ul class="product-tab-nav nav justify-content-center">
                         <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
@@ -24,15 +22,16 @@
                                 Sales</a></li>
                     </ul>
                 </div>
-                <!-- Tab End -->
+                <!-- Tab End --> --}}
             </div>
             <div class="row">
                 <div class="col">
                     <div class="tab-content">
-                        @include('products.new-arrival')
-                        @include('products.best-seller')
-                        @include('products.sale-items')
-                        @include('products.on-sale')
+                        @include('home.stores')
+                        {{-- @include('home.new-arrival') --}}
+                        {{-- @include('home.best-seller')
+                        @include('home.sale-items')
+                        @include('home.on-sale') --}}
                     </div>
                 </div>
             </div>

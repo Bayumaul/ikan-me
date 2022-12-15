@@ -77,6 +77,13 @@
                                                                 required value="{{ @$produk->stok ?? 0 }}" />
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="billing-info">
+                                                            <label>Foto Thubmnail</label>
+                                                            <input type="file" name="foto" required
+                                                                accept="image/*" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="billing-back-btn">
                                                     <div class="billing-back">
@@ -122,25 +129,26 @@
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 1</label>
-                                                            <input type="file" name="foto[]" required />
+                                                            <input type="file" name="foto[]" accept="image/*"
+                                                                required />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 2</label>
-                                                            <input type="file" name="foto[]" />
+                                                            <input type="file" name="foto[]" accept="image/*" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 3</label>
-                                                            <input type="file" name="foto[]" />
+                                                            <input type="file" name="foto[]" accept="image/*" />
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
                                                             <label>Foto 4</label>
-                                                            <input type="file" name="foto[]" />
+                                                            <input type="file" name="foto[]" accept="image/*" />
                                                         </div>
                                                     </div>
                                                 </div>

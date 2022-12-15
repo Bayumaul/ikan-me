@@ -40,7 +40,7 @@ class StoreController extends Controller
     {
         // return $request->logo;
         $this->validate($request, [
-            'logo'     => 'required|image|mimes:png,jpg,jpeg',
+            'logo'     => 'image|mimes:png,jpg,jpeg',
             'name'     => 'required',
             'description'   => 'required'
         ]);
@@ -52,6 +52,7 @@ class StoreController extends Controller
             'user_id' => auth()->user()->id,
             'name' => $request->name,
             'description' => $request->description,
+            'address' => $request->address,
         ]);
 
         if ($request->logo) {
@@ -95,13 +96,14 @@ class StoreController extends Controller
     public function update(Request $request, Store $store)
     {
         $this->validate($request, [
-            'logo'     => 'required|image|mimes:png,jpg,jpeg',
+            'logo'     => 'image|mimes:png,jpg,jpeg',
             'name'     => 'required',
             'description'   => 'required'
         ]);
         $store->update([
             'name' => $request->name,
             'description' => $request->description,
+            'address' => $request->address,
         ]);
 
         if ($request->logo) {

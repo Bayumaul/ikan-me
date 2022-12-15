@@ -3,9 +3,9 @@
     Beranda
 @endsection
 @section('content')
-    @include('products.slider')
-    @include('products.banner')
-    @include('products.tab')
+    @include('home.slider')
+    @include('home.banner')
+    @include('home.tab')
     <!-- Banner Section Start -->
     {{-- <div class="section pb-100px pt-100px">
         <div class="container-fluid">
@@ -46,7 +46,7 @@
         </div>
     </div> --}}
     <!-- Banner Section End -->
-    @include('products.new-product')
+    @include('home.new-product')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

@@ -44,6 +44,12 @@
                                                             <textarea name="description" placeholder="Deskripsi Toko" required>{{ @$store->description }}</textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="billing-info">
+                                                            <label>Alamat Toko</label>
+                                                            <textarea name="address" placeholder="Alamat Toko" required>{{ @$store->address }}</textarea>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
                                                             <label>Logo</label>

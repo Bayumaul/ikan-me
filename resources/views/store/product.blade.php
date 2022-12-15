@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Daftar Produk
+@endsection
 @section('content')
     <!-- Cart Area Start -->
     <div class="cart-main-area pt-100px pb-100px">

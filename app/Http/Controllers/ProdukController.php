@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Produk\Produk;
 use Illuminate\Validation\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Image;
 
 class ProdukController extends Controller
 {
@@ -63,9 +64,17 @@ class ProdukController extends Controller
             'stok' => $request->stok,
             'description' => $request->description,
         ]);
-
-        return redirect(route('produk.edit', $product->id))
-            ->with('success', 'Produk Berhasil Ditambahkan');
+        if ($request->file('foto')) {
+            $image = $request->file('foto');
+            $image->storeAs('product/images/', $image->hashName());
+            ProdukPhotos::create([
+                'produk_id' => $product->id,
+                'foto' => $image->hashName(),
+            ]);
+        }
+        Alert::success('Produk Berhasil Dibuat !');
+        // return back();
+        return redirect(route('produk.edit', $product->id));
     }
 
     /**
@@ -102,8 +111,6 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-
-        // return $abcde;
         if ($request->file('foto')) {
             foreach ($request->foto as $key => $value) {
                 $image = $request->file('foto')[$key];
@@ -123,8 +130,9 @@ class ProdukController extends Controller
                 'description' => $request->description,
             ]);
         }
-        return back()
-            ->with('success', 'Produk / Foto Berhasil Diupdate');
+
+        Alert::success('Produk Berhasil Diupdate !');
+        return back();
     }
 
     /**
