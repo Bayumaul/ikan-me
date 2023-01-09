@@ -11,11 +11,11 @@
                     <div class="checkout-wrapper">
                         <div id="faq" class="panel-group">
                             <div class="panel panel-default single-my-account" data-aos="fade-up" data-aos-delay="200">
-                                <div class="panel-heading my-account-title">
+                                {{-- <div class="panel-heading my-account-title">
                                     <h3 class="panel-title"><span>1 .</span> <a data-bs-toggle="collapse" class="collapsed"
                                             aria-expanded="true" href="#my-account-1">Edit Nama Toko </a>
                                     </h3>
-                                </div>
+                                </div> --}}
                                 <div id="my-account-1" class="panel-collapse collapse show" data-bs-parent="#faq">
                                     <div class="panel-body">
                                         <div class="myaccount-info-wrapper">
